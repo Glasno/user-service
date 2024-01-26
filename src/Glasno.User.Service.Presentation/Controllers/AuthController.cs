@@ -1,6 +1,7 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using FluentResults;
 using Glasno.User.Service.Domain.Services;
 using Glasno.User.Service.Presentation.Dto;
 using Microsoft.AspNetCore.Mvc;
@@ -22,13 +23,13 @@ public class AuthController : ControllerBase
     }
 
     [HttpPost(nameof(Authenticate))]
-    public IActionResult Authenticate(AuthCommandDto request)
+    public Result<string> Authenticate(AuthCommandDto request)
     {
         var user = _usersService.GetUserByUsernameAndPassword(request.Username, request.Password);
 
         if (user == null)
         {
-            return BadRequest("Invalid credentials");
+            return Result.Fail("Invalid credentials");
         }
 
         var claims = Claims(user);
@@ -37,7 +38,7 @@ public class AuthController : ControllerBase
 
         var token = Token(claims, signIn);
 
-        return Ok(new JwtSecurityTokenHandler().WriteToken(token));
+        return new JwtSecurityTokenHandler().WriteToken(token);
     }
 
     private SigningCredentials SigningCredentials()
