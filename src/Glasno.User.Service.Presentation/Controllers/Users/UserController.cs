@@ -1,5 +1,4 @@
 using FluentResults;
-using Glasno.User.Service.Domain.Services;
 using Glasno.User.Service.Presentation.Convertors;
 using Glasno.User.Service.Presentation.Dto;
 using Glasno.User.Service.Presentation.Dto.Requests;
@@ -9,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Glasno.User.Service.Presentation.Controllers;
 
 [ApiController]
-[Route("api/user/")]
+[Route("api/user")]
 public class UserController
 {
     private readonly IMediator _mediator;
@@ -34,18 +33,18 @@ public class UserController
     }
 
     [HttpPost]
-    public IResult CreateUser([FromBody] CreateOrUpdateUserDto createOrUpdateUserDto)
+    public IResult CreateUser([FromBody] CreateUserCommandDto createUserCommandDto)
     {
-        var newUser = UserConvertor.FromCreateUserDTO(createOrUpdateUserDto);
+        var newUser = UserConvertor.FromCreateUserDTO(createUserCommandDto);
         _userService.CreateUser(newUser);
 
         return Results.Ok();
     }
 
     [HttpPut]
-    public IResult UpdateUser([FromBody] CreateOrUpdateUserDto updateUserDto)
+    public IResult UpdateUser([FromBody] CreateUserCommandDto updateUserCommandDto)
     {
-        var newUser = UserConvertor.FromCreateUserDTO(updateUserDto);
+        var newUser = UserConvertor.FromCreateUserDTO(updateUserCommandDto);
         _userService.UpdateUser(newUser);
         return Results.Ok();
     }

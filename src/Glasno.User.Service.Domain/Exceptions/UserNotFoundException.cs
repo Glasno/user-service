@@ -1,4 +1,4 @@
-namespace Glasno.User.Service.Application.Exceptions;
+namespace Glasno.User.Service.Domain.Exceptions;
 
 public class UserNotFoundException : ArgumentException
 {

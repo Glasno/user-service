@@ -1,5 +1,5 @@
 using AutoMapper;
-using Glasno.User.Service.Application.Users.Contracts;
+using Glasno.User.Service.Application.Queries.Users.Search.Contracts;
 using Glasno.User.Service.Presentation.Dto;
 using Glasno.User.Service.Presentation.Dto.Requests;
 
@@ -14,34 +14,27 @@ public class UserConvertor
         _mapper = mapper;
     }
 
-    public SearchUserByIdInternal ToInternal(Guid id)
+    public GetUserByIdQueryInternal ToInternal(Guid id)
     {
-        return new SearchUserByIdInternal(id);
+        return new GetUserByIdQueryInternal(id);
     }
 
 
-    public static UserInformationDto ToFullInformationDTO(Domain.Entities.User user)
+    public UserInformationDto ToFullInformationDTO(GetUserResponseInternal responseInternal)
     {
-        return new UserInformationDto(
-            user.Id,
-            user.Username,
-            user.FullName,
-            user.AboutMe,
-            user.AvatarUrl,
-            user.City,
-            user.Specializations);
+        return _mapper.Map<UserInformationDto>(responseInternal.user);
     }
 
-    public static Domain.Entities.User FromCreateUserDTO(CreateOrUpdateUserDto createOrUpdateUserDto)
+    public static Domain.Entities.User FromCreateUserDTO(CreateUserCommandDto createUserCommandDto)
     {
         return new Domain.Entities.User(
             Guid.NewGuid(),
-            createOrUpdateUserDto.Username,
-            createOrUpdateUserDto.Password,
-            createOrUpdateUserDto.FullName,
-            createOrUpdateUserDto.AboutMe,
-            createOrUpdateUserDto.AvatarUrl,
-            createOrUpdateUserDto.City,
-            createOrUpdateUserDto.Specializations, createOrUpdateUserDto.Services);
+            createUserCommandDto.Username,
+            createUserCommandDto.Password,
+            createUserCommandDto.FullName,
+            createUserCommandDto.AboutMe,
+            createUserCommandDto.AvatarUrl,
+            createUserCommandDto.City,
+            createUserCommandDto.Specializations, createUserCommandDto.Services);
     }
 }

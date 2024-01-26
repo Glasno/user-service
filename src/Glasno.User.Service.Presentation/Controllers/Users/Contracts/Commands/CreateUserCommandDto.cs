@@ -1,6 +1,6 @@
 namespace Glasno.User.Service.Presentation.Dto.Requests;
 
-public sealed record CreateOrUpdateUserDto(
+public sealed record CreateUserCommandDto(
     string Username,
     string Password,
     string FullName,
@@ -9,6 +9,4 @@ public sealed record CreateOrUpdateUserDto(
     string City,
     IList<string> Specializations,
     IList<string> Services
-)
-{
-}
+);

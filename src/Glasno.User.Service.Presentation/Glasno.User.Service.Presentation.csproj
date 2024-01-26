@@ -29,4 +29,8 @@
       <ProjectReference Include="..\Glasno.User.Service.Application\Glasno.User.Service.Application.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Dto\Requests\" />
+    </ItemGroup>
+
 </Project>

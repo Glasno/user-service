@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Glasno.User.Service.Present
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Glasno.User.Service.Application", "src\Glasno.User.Service.Application\Glasno.User.Service.Application.csproj", "{4A862BF6-94E3-4229-A5B6-1BBC2DCC9E0B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Glasno.User.Service.Application.Tests", "src\Glasno.User.Service.Application.Tests\Glasno.User.Service.Application.Tests.csproj", "{4198915E-F7A2-4605-8168-E6FB51549C1B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +45,7 @@ Global
 		{5381FF31-3E20-4DA4-9DEB-3EA3EB0311E8} = {9265F3DD-11A0-442A-81E6-8E0B941A9839}
 		{A7C471F1-9059-4AA7-9227-C435D3394414} = {9265F3DD-11A0-442A-81E6-8E0B941A9839}
 		{4A862BF6-94E3-4229-A5B6-1BBC2DCC9E0B} = {9265F3DD-11A0-442A-81E6-8E0B941A9839}
+		{4198915E-F7A2-4605-8168-E6FB51549C1B} = {9265F3DD-11A0-442A-81E6-8E0B941A9839}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{374FEFF3-572C-44BB-999C-111BA3406E92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -69,5 +72,9 @@ Global
 		{4A862BF6-94E3-4229-A5B6-1BBC2DCC9E0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4A862BF6-94E3-4229-A5B6-1BBC2DCC9E0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4A862BF6-94E3-4229-A5B6-1BBC2DCC9E0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4198915E-F7A2-4605-8168-E6FB51549C1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4198915E-F7A2-4605-8168-E6FB51549C1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4198915E-F7A2-4605-8168-E6FB51549C1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4198915E-F7A2-4605-8168-E6FB51549C1B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
