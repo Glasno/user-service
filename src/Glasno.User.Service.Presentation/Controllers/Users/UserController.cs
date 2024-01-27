@@ -1,51 +1,58 @@
+using AutoMapper;
 using FluentResults;
-using Glasno.User.Service.Presentation.Convertors;
+using Glasno.User.Service.Application.Commands.Users.Create.Contracts;
+using Glasno.User.Service.Application.Queries.Users.Search.Contracts;
+using Glasno.User.Service.Presentation.Controllers.Users.Contracts;
 using Glasno.User.Service.Presentation.Dto;
 using Glasno.User.Service.Presentation.Dto.Requests;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Glasno.User.Service.Presentation.Controllers;
+namespace Glasno.User.Service.Presentation.Controllers.Users;
 
 [ApiController]
 [Route("api/user")]
-public class UserController
+public class UserController : ControllerBase
 {
     private readonly IMediator _mediator;
-    private readonly UserConvertor _convertor;
+    private readonly Mapper _mapper;
 
-    public UserController(IMediator mediator, UserConvertor convertor)
+    public UserController(IMediator mediator, Mapper mapper)
     {
         _mediator = mediator;
-        _convertor = convertor;
+        _mapper = mapper;
     }
 
+
     [HttpGet("/{id}")]
-    public async Task<Result<UserInformationDto>> GetUserById(Guid id)
+    public async Task<Result<UserInformationDto>> GetUserById(long id)
     {
-        var internalQuery = _convertor.ToInternal(id);
+        var internalQuery =  new GetUserQueryInternal(id);
         
         var internalResponse = await _mediator.Send(internalQuery);
 
-        var response = _convertor.ToFullInformationDTO(internalResponse);
+        var response = _mapper.Map<UserInformationDto>(internalResponse);
         
         return response;
     }
 
     [HttpPost]
-    public IResult CreateUser([FromBody] CreateUserCommandDto createUserCommandDto)
+    public async Task<Result> CreateUser([FromBody] CreateUserCommandDto createUserCommandDto)
     {
-        var newUser = UserConvertor.FromCreateUserDTO(createUserCommandDto);
-        _userService.CreateUser(newUser);
-
-        return Results.Ok();
+        var internalQuery = _mapper.Map<CreateUserCommandInternal>(createUserCommandDto);
+        
+        var internalResponse = await _mediator.Send(internalQuery);
+        
+        return Result.Ok();
     }
 
     [HttpPut]
-    public IResult UpdateUser([FromBody] CreateUserCommandDto updateUserCommandDto)
+    public async Task<Result> UpdateUser([FromBody] UpdateUserCommandDto updateUserCommandDto)
     {
-        var newUser = UserConvertor.FromCreateUserDTO(updateUserCommandDto);
-        _userService.UpdateUser(newUser);
-        return Results.Ok();
+        var internalQuery = _mapper.Map<UpdateUserCommandDto>(updateUserCommandDto);
+        
+        var internalResponse = await _mediator.Send(internalQuery);
+        
+        return Result.Ok();
     }
 }
