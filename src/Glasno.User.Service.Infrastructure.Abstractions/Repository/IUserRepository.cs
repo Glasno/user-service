@@ -4,8 +4,7 @@ using Domain.Entities;
 
 public interface IUserRepository
 {
-    Task<User> GetUser(string username, string password);
-    Task<User> GetUser(long id);
-    Task CreateUser(User newUser);
-    Task UpdateUser(User user);
+    Task<User> Get(long id);
+    Task Add(User newUser);
+    Task Update(User user);
 }

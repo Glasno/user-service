@@ -20,7 +20,7 @@ internal sealed class CreateUserHandler : IRequestHandler<CreateUserCommandInter
     public async Task<CreateUserResponseInternal> Handle(CreateUserCommandInternal request, CancellationToken cancellationToken)
     {
         var user = _mapper.Map<Domain.Entities.User>(request);
-        await _userRepository.CreateUser(user);
+        await _userRepository.Add(user);
 
         return new CreateUserResponseInternal();
     }

@@ -16,19 +16,7 @@ public class UserRepository : IUserRepository
     }
 
 
-    public async Task<Domain.Entities.User> GetUser(string username, string password)
-    {
-        var user = await _db.Users
-            .SingleOrDefaultAsync(user =>
-                user.Username == username &&
-                user.Password == password);
-
-        if (user is null) throw new UserNotFoundException($"Пользователь с логином {username} не найден");
-
-        return user;
-    }
-
-    public async Task<Domain.Entities.User> GetUser(long id)
+    public async Task<Domain.Entities.User> Get(long id)
     {
         var user = await _db
             .Users
@@ -39,13 +27,13 @@ public class UserRepository : IUserRepository
         return user;
     }
 
-    public Task CreateUser(Domain.Entities.User newUser)
+    public Task Add(Domain.Entities.User newUser)
     {
         _db.Users.Add(newUser);
         return _db.SaveChangesAsync();
     }
 
-    public Task UpdateUser(Domain.Entities.User user)
+    public Task Update(Domain.Entities.User user)
     {
         _db.Users.Update(user);
         return _db.SaveChangesAsync();

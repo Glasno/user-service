@@ -8,10 +8,10 @@ public sealed class User
 
     public required string FullName { get; set; }
 
-    public required string AboutMe { get; set; }
+    public string? AboutMe { get; set; }
 
     public required string AvatarUrl { get; set; }
 
-    public required string City { get; set; }
+    public string? City { get; set; }
     
 }

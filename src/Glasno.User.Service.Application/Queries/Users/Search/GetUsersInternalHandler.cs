@@ -7,12 +7,12 @@ using GetUserResponseInternal = Glasno.User.Service.Application.Queries.Users.Se
 
 namespace Glasno.User.Service.Application.Queries.Users.Search;
 
-internal sealed class SearchUsersInternalHandler : IRequestHandler<GetUserQueryInternal, GetUserResponseInternal>
+internal sealed class GetUsersInternalHandler : IRequestHandler<GetUserQueryInternal, GetUserResponseInternal>
 {
     private readonly IUserRepository _userRepository;
     private readonly Mapper _mapper;
 
-    public SearchUsersInternalHandler(IUserRepository userRepository, Mapper mapper)
+    public GetUsersInternalHandler(IUserRepository userRepository, Mapper mapper)
     {
         _userRepository = userRepository;
         _mapper = mapper;
@@ -21,7 +21,7 @@ internal sealed class SearchUsersInternalHandler : IRequestHandler<GetUserQueryI
 
     public async Task<GetUserResponseInternal> Handle(GetUserQueryInternal request, CancellationToken cancellationToken)
     {
-        var user = await _userRepository.GetUser(request.Id);
+        var user = await _userRepository.Get(request.Id);
 
         return new GetUserResponseInternal(user);
     }

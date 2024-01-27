@@ -8,7 +8,5 @@ public sealed record CreateUserCommandInternal(
     string FullName,
     string AboutMe,
     string AvatarUrl,
-    string City,
-    IList<string> Specializations,
-    IList<string> Services
+    string City
 ): IRequest<CreateUserResponseInternal>;

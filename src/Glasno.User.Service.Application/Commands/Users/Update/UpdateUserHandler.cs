@@ -7,12 +7,12 @@ namespace Glasno.User.Service.Application.Commands.Users.Update;
 
 public sealed class UpdateUserHandler: IRequestHandler<UpdateUserCommandInternal, UpdateUserResponseInternal>
 {
-    private readonly IUserRepository _repository;
+    private readonly IUserRepository _userRepository;
     private readonly Mapper _mapper;
 
     public UpdateUserHandler(IUserRepository repository, Mapper mapper)
     {
-        _repository = repository;
+        _userRepository = repository;
         _mapper = mapper;
     }
 
@@ -20,7 +20,7 @@ public sealed class UpdateUserHandler: IRequestHandler<UpdateUserCommandInternal
     {
         var user = _mapper.Map<Domain.Entities.User>(request);
         
-        await _repository.UpdateUser(user);
+        await _userRepository.Update(user);
         
         return new UpdateUserResponseInternal();
     }
