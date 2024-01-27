@@ -8,6 +8,4 @@ public sealed record UserInformationDto(
     string avatarUrl,
     string city,
     IList<string> specializations
-)
-{
-}
+);
